@@ -1,8 +1,25 @@
 <script setup lang="ts">
+import { inject, provide } from 'vue';
+import Header from './components/Header/index.vue';
+import { useTranslateStore } from './stores/translate';
+import Footer from './components/Footer.vue';
+
+const translateStore = useTranslateStore();
+
+const i18n: any = inject('translate');
+const translation = i18n[translateStore.lang];
+
+provide('app-translation', translation);
 </script>
 
 <template>
-    Hello world
+    <div class="page">
+      <Header />
+      <main>
+        <RouterView />
+      </main>
+      <Footer />
+    </div>
 </template>
 
 <style scoped>
