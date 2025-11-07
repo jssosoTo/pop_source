@@ -3,6 +3,7 @@
 
 #### Project Scripts
 * Start: `yarn dev` | `npm run dev`
+* Install: `yarn` | `npm install`
 
 
 -----
