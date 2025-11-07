@@ -37,7 +37,12 @@ const themeIcon: ThemeIcon = {
 
 <template>
     <header class="header-container flex items-center justify-between">
-        <section class="logo">{{ translation.logoTitle }}</section>
+        <section class="logo">
+            <RouterLink to="/">
+                <span class="logo-text transition-all duration-300">Pop</span>
+                <span class="text-(--primary-hover-text-color)">Source</span>
+            </RouterLink>
+        </section>
         <nav class="navigate flex items-center gap-4">
             <RouterLink class="relative link" active-class="active-text" v-for="{ to, title } in navLinks" :to>
                 {{ title }}
@@ -112,14 +117,23 @@ const themeIcon: ThemeIcon = {
         padding: 1rem 10rem;
     }
 
+    .logo {
+        font-weight: 900;
+    }
+
     .configs button {
         cursor: pointer;
         height: 1.2rem;
         width: 1.2rem;
     }
 
+    .logo-text {
+        color: var(--secondary-text-color);
+    }
+
     .link:hover,
-    .active-text {
+    .active-text,
+    .logo:hover .logo-text {
         color: var(--primary-hover-text-color);
     }
 
