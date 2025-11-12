@@ -36,7 +36,7 @@ const themeIcon: ThemeIcon = {
 </script>
 
 <template>
-    <header class="header-container flex items-center justify-between">
+    <header class="header-container flex items-center justify-between z-10">
         <section class="logo">
             <RouterLink to="/">
                 <span class="logo-text transition-all duration-300">Pop</span>
