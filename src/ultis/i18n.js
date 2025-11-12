@@ -1,7 +1,7 @@
 export const translateOptions = {
     'zh-cn': {
         // 导航栏
-        logoTitle: 'Pop Source',
+        logoTitle: '李 昊',
         index: '首页',
         about: '关于',
 
@@ -10,7 +10,7 @@ export const translateOptions = {
     },
     'en': {
         // Navigator
-        logoTitle: 'Pop Source',
+        logoTitle: 'Kaho Lee',
         index: 'Home',
         about: 'About',
 
