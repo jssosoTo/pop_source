@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { MoonNight, NoSmoking, Smoking, Sunrise } from '@element-plus/icons-vue';
+import { MagicStick, MoonNight, NoSmoking, Smoking, Sunrise } from '@element-plus/icons-vue';
 import { ElIcon } from 'element-plus';
 import { useThemeStore } from '../../stores/theme';
 import { useTranslateStore } from '../../stores/translate';
 import type { ThemeIcon } from './types';
 import { inject } from 'vue';
 import { RouterLink } from 'vue-router';
+import JSConfetti from 'js-confetti';
 
 const themeStore = useThemeStore();
 const translateStore = useTranslateStore();
@@ -33,14 +34,20 @@ const themeIcon: ThemeIcon = {
     "zh-cn": Smoking,
     'en': NoSmoking
 }
+
+const confetti = new JSConfetti()
+
+function showConfetti() {
+  confetti.addConfetti()
+}
 </script>
 
 <template>
     <header class="header-container flex items-center justify-between z-10">
         <section class="logo">
             <RouterLink to="/">
-                <span class="logo-text transition-all duration-300">Pop</span>
-                <span class="text-(--primary-hover-text-color)">Source</span>
+                <span class="logo-text transition-all duration-300">{{ translation.logoTitle.split(' ')[0] }}</span>
+                <span class="text-(--primary-hover-text-color)">{{ translation.logoTitle.split(' ')[1] }}</span>
             </RouterLink>
         </section>
         <nav class="navigate flex items-center gap-4">
@@ -99,6 +106,25 @@ const themeIcon: ThemeIcon = {
                 @click="handleSwitchTranslation"
             >
                 <ElIcon><component :is="themeIcon[translateStore.lang]" /></ElIcon>
+            </button>
+            <button 
+                class="
+                    relative
+                    after:rounded-full 
+                    after:content-[''] 
+                    after:absolute 
+                    after:top-1/2 
+                    after:left-1/2
+                    after:-translate-1/2
+                    after:w-8
+                    after:h-8
+                    after:-z-1
+                    hover:after:bg-(--btn-bg-color)
+                " 
+                title="firework: click to show"
+                @click="showConfetti"
+            >
+                <ElIcon><MagicStick /></ElIcon>
             </button>
         </section>
     </header>
