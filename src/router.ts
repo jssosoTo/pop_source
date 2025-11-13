@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
 import Error from "./components/Error.vue";
 import Home from "./pages/Home.vue";
+import About from "./pages/About.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/about',
-        component: HelloWorld
+        component: About
     },
     {
         path: '/:pathMatch(.*)*',

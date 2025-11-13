@@ -6,7 +6,11 @@ export const translateOptions = {
         about: '关于',
 
         // 底部
-        motto: '热爱一切，总会见一面的'
+        motto: '热爱一切，总会见一面的',
+
+        // 关于页面
+        portal: '传送门',
+        basicInfo: '基础信息',
     },
     'en': {
         // Navigator
@@ -15,7 +19,11 @@ export const translateOptions = {
         about: 'About',
 
         // footer
-        motto: 'to be or not to be'
+        motto: 'to be or not to be',
+
+        // about page
+        portal: 'Portal',
+        basicInfo: 'Basic Information',
     }
 }
 
