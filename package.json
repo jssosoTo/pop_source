@@ -11,8 +11,10 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "@tailwindcss/vite": "^4.1.17",
+    "animate.css": "^4.1.1",
     "element-plus": "^2.11.7",
     "js-confetti": "^0.13.1",
+    "marked": "^17.0.0",
     "pinia": "^3.0.4",
     "tailwindcss": "^4.1.17",
     "vue": "^3.5.22",
