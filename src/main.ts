@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
+import "animate.css";
 import App from './App.vue'
 import { createPinia } from 'pinia';
 import translation, { translateOptions } from './ultis/i18n.js';
