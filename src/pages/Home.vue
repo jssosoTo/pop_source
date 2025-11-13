@@ -1,6 +1,6 @@
 <template>
     <section
-        class="main"
+        class="min-full-screen"
     >
         <div class="carousel-container">
             <Carousel :desc-list="descList" />
@@ -34,10 +34,6 @@
 </script>
 
 <style scoped>
-    .main {
-        min-height: calc(100vh - 3.4rem);
-    }
-
     .carousel-container {
         padding: 2rem;
     }

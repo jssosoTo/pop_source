@@ -12,6 +12,7 @@ html {
 
 :root {
     --primary-bg-color: #ffffff;
+    --reverse-bg-color: #111827;
     --box-shadow-color: rgba(0, 0, 0, .1);
     --header-shadow: 0 2px 20px 0px;
     --primary-text-color: #3c3c43;
@@ -23,6 +24,7 @@ html {
 
 :root body[data-theme="dark"] {
     --primary-bg-color: #111827;
+    --reverse-bg-color: #ffffff;
     --box-shadow-color: #000000;
     --header-shadow: 0 2px 0 0px;
     --primary-text-color: #d9e6eb;
@@ -48,4 +50,20 @@ body {
 
 .pop-btn:hover {
     border-color: var(--primary-hover-text-color);
+}
+
+.show-link-color a {
+    color: var(--primary-hover-text-color)
+}
+
+.show-link-color a:hover {
+    text-decoration: underline var(--primary-hover-text-color)
+}
+
+.min-full-screen {
+    min-height: calc(100vh - 3.4rem);
+}
+
+.full-screen {
+    height: calc(100vh - 3.4rem);
 }
