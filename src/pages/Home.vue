@@ -4,12 +4,14 @@
     >
         <div class="carousel-container">
             <Carousel :desc-list="descList" />
+            <Calendar />
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
     import Carousel, { type CarouselItem } from '../components/Carousel/index.vue'
+    import Calendar from '../components/Calendar/index.vue'
 
     const descList: CarouselItem[] = [
         {
