@@ -42,8 +42,12 @@
         <div class="grid grid-cols-7 text-center text-(--sub-text-color)">
             <div v-for="day in days">{{ day }}</div>
             <div 
+                :ref="(el) => {
+                    if (!el) return;
+                    dateRefs[date] = el as HTMLDivElement;
+                }"
                 v-for="date in daysOfMonth" 
-                @click="selectDate = dayjs(date)" 
+                @click="handleCheckDate(date)" 
                 :key="date"
                 class="aspect-square flex items-center justify-center cursor-pointer transition-all duration-300"
                 :class="{
@@ -55,14 +59,42 @@
                 {{ date.split('-').at(-1) }}
             </div>
         </div>
+        <Teleport to="#app">
+            <Mask v-if="isModalShow" @click="closeModal">
+                <template #modal>
+                    <Modal
+                        ref="modalRef"
+                        header-title="日程安排" 
+                        disable-btn
+                        is-follow-ref
+                        @click.stop
+                        @close-modal="closeModal"
+                        @cancel="modalCancel"
+                        @confirm="confirmModal"
+                        class="w-64"
+                    >
+                        <template #content>
+                            <ul>
+                                <li>你好</li>
+                                <li>你好</li>
+                                <li>你好</li>
+                                <li>你好</li>
+                            </ul>
+                        </template>
+                    </Modal>
+                </template>
+            </Mask>
+        </Teleport>
     </section>
 </template>
 
 <script setup lang="ts">
+import Mask from '../Mask/index.vue'
+import Modal from '../Modal/index.vue'
 import { ArrowLeftBold, ArrowRightBold } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
 import { ElIcon } from 'element-plus';
-import { computed, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 
 const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 const now = ref(dayjs());
@@ -80,6 +112,45 @@ const daysOfMonth = computed<string[]>(() => {
         return now.add(1, 'M').set('date', i - firstDayOfMonth - lastDateOfMonth + 1).format('YYYY-MM-DD');
     })
 })
+
+const isModalShow = ref<boolean>(false);
+const dateRefs = ref<Record<string, HTMLDivElement>>({});
+const modalRef = ref(null);
+const toggleBodyScroll = (locked: boolean) => {
+    document.body.style.overflow = locked ? 'hidden' : '';
+};
+
+watch(isModalShow, (visible) => {
+    toggleBodyScroll(visible);
+});
+
+onBeforeUnmount(() => {
+    toggleBodyScroll(false);
+});
+
+const closeModal = () => isModalShow.value = false;
+const openModal = () => isModalShow.value = true;
+
+const modalCancel = () => {
+    closeModal();
+}
+
+const confirmModal = () => {
+    closeModal();
+}
+
+const handleCheckDate = async (date: string) => {
+    const dateEl = dateRefs.value[date];
+
+    selectDate.value = dayjs(date);
+    openModal()
+    await nextTick();
+    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
+    (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
+
+    if (document.documentElement.clientHeight * .8 < dateEl?.offsetTop!) (modalRef.value as any).rootEl.classList.add('position_top')
+    else (modalRef.value as any).rootEl.classList.remove('position_top')
+}
 </script>
 
 <style scoped>
