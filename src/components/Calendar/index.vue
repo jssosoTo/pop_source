@@ -94,6 +94,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { ElIcon } from 'element-plus';
 import { computed, inject, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import { useTranslateStore } from '../../stores/translate';
+import isMobile from '../../ultis/isMobile';
 
 const translateStore = useTranslateStore();
 const translation: any = inject('app-translation');
@@ -121,7 +122,9 @@ const dateRefs = ref<Record<string, HTMLDivElement>>({});
 const modalRef = ref(null);
 const toggleBodyScroll = (locked: boolean) => {
     document.body.style.overflow = locked ? 'hidden' : '';
-    document.body.style.paddingRight = locked ? '10px' : '';
+    if (!isMobile()) {
+        document.body.style.paddingRight = locked ? '10px' : '';
+    }
 };
 
 watch(isModalShow, (visible) => {
