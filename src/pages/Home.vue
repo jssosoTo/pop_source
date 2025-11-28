@@ -4,7 +4,10 @@
     >
         <div class="carousel-container">
             <Carousel :desc-list="descList" />
-            <Calendar />
+            <div class="flex items-center gap-8 mt-8 px-8 h-96">
+                <Calendar class="border-2 p-4 rounded-xl border-(--primary-hover-text-color)" />
+                <Search class="flex-1" />
+            </div>
         </div>
     </section>
 </template>
@@ -12,6 +15,7 @@
 <script setup lang="ts">
     import Carousel, { type CarouselItem } from '../components/Carousel/index.vue'
     import Calendar from '../components/Calendar/index.vue'
+    import Search from '../components/Search/index.vue'
 
     const descList: CarouselItem[] = [
         {
