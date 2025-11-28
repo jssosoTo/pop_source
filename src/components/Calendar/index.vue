@@ -74,12 +74,10 @@
                         class="w-64"
                     >
                         <template #content>
-                            <ul>
-                                <li>你好</li>
-                                <li>你好</li>
-                                <li>你好</li>
-                                <li>你好</li>
+                            <ul v-if="false">
+                                <li></li>
                             </ul>
+                            <div v-else class="px-4">暂未获取到活动。¯\(°_o)/¯ssssss</div>
                         </template>
                     </Modal>
                 </template>
@@ -144,31 +142,29 @@ const confirmModal = () => {
     closeModal();
 }
 
-const handleCheckDate = async (date: string) => {
-    const dateEl = dateRefs.value[date];
+const setElPosition = () => {
+    const dateEl = dateRefs.value[selectDate.value.format('YYYY-MM-DD')];
+    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
+    (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
 
+    if (document.documentElement.clientHeight * .9 < (dateEl?.offsetTop! + dateEl?.offsetHeight!)) (modalRef.value as any).rootEl.classList.add('position_top')
+    else (modalRef.value as any).rootEl.classList.remove('position_top')
+}
+
+const handleCheckDate = async (date: string) => {
     selectDate.value = dayjs(date);
     showDate.value = dayjs(date);
     openModal()
     await nextTick();
-    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop! - document.documentElement.scrollTop + 'px';
-    (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft! + 'px';
 
-    console.log(document.documentElement.clientHeight, dateEl?.offsetTop)
-    if (document.documentElement.clientHeight * .8 < (dateEl?.offsetTop! - document.documentElement.scrollTop)) (modalRef.value as any).rootEl.classList.add('position_top')
-    else (modalRef.value as any).rootEl.classList.remove('position_top')
+    setElPosition();
 }
 
 watch(
     selectDate,
     () => {
         if (!isModalShow.value) return;
-        const dateEl = dateRefs.value[selectDate.value.format('YYYY-MM-DD')];
-        (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
-        (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
-
-        if (document.documentElement.clientHeight * .8 < dateEl?.offsetTop!) (modalRef.value as any).rootEl.classList.add('position_top')
-        else (modalRef.value as any).rootEl.classList.remove('position_top')
+        setElPosition();
     },
     { flush: 'post' }
 )
