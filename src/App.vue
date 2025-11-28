@@ -3,6 +3,7 @@ import { inject, provide } from 'vue';
 import Header from './components/Header/index.vue';
 import { useTranslateStore } from './stores/translate';
 import Footer from './components/Footer.vue';
+import FancyCursor from './components/FancyCursor.vue';
 
 const translateStore = useTranslateStore();
 
@@ -19,6 +20,7 @@ provide('app-translation', translation);
         <RouterView />
       </main>
       <Footer />
+      <FancyCursor />
     </div>
 </template>
 
