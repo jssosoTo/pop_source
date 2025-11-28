@@ -7,6 +7,11 @@ body {
   overflow-y: scroll;
 }
 
+.custom-cursor-hidden,
+.custom-cursor-hidden * {
+  cursor: none !important;
+}
+
 /* 自定义滚动条样式 */
 body::-webkit-scrollbar {
   width: 10px; /* 设置滚动条宽度 */
