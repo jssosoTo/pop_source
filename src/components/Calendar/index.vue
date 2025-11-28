@@ -60,7 +60,7 @@
             </div>
         </div>
         <Teleport to="#app">
-            <Mask v-if="isModalShow" @click="closeModal">
+            <Mask v-if="isModalShow" @click="closeModal" class="bg-transparent">
                 <template #modal>
                     <Modal
                         ref="modalRef"
@@ -145,12 +145,26 @@ const handleCheckDate = async (date: string) => {
     selectDate.value = dayjs(date);
     openModal()
     await nextTick();
-    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
-    (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
+    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop! - document.documentElement.scrollTop + 'px';
+    (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft! + 'px';
 
-    if (document.documentElement.clientHeight * .8 < dateEl?.offsetTop!) (modalRef.value as any).rootEl.classList.add('position_top')
+    console.log(document.documentElement.clientHeight, dateEl?.offsetTop)
+    if (document.documentElement.clientHeight * .8 < (dateEl?.offsetTop! - document.documentElement.scrollTop)) (modalRef.value as any).rootEl.classList.add('position_top')
     else (modalRef.value as any).rootEl.classList.remove('position_top')
 }
+
+watch(
+    selectDate,
+    () => {
+        const dateEl = dateRefs.value[selectDate.value.format('YYYY-MM-DD')];
+        (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
+        (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
+
+        if (document.documentElement.clientHeight * .8 < dateEl?.offsetTop!) (modalRef.value as any).rootEl.classList.add('position_top')
+        else (modalRef.value as any).rootEl.classList.remove('position_top')
+    },
+    { flush: 'post' }
+)
 </script>
 
 <style scoped>
