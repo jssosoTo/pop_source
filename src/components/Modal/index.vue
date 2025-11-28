@@ -1,7 +1,7 @@
 <template>
     <div
         ref="rootRef"
-        class="absolute min-w-36 bg-(--primary-bg-color) rounded-xl py-2"
+        class="absolute min-w-36 bg-(--primary-bg-color) rounded-xl py-2 shadow shadow-blue-200"
         style="top: 0; left: 0;"
         :style="[
             !isFollowRef ? { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
