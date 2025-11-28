@@ -37,7 +37,7 @@ const filterText = ref<string>('');
 const mockData: InfoItemType[] = [
     {
         title: '热烈欢迎',
-        detail: '点击右方箭头，直通开发者线上仓库！！！欢迎你的光临！！',
+        detail: '点击右方箭头，直通开发者线上仓库(ps：是需要翻墙的)！！！欢迎你的光临！！',
         url: 'https://github.com/jssosoTo'
     },
     {
