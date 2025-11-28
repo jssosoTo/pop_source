@@ -121,6 +121,7 @@ const dateRefs = ref<Record<string, HTMLDivElement>>({});
 const modalRef = ref(null);
 const toggleBodyScroll = (locked: boolean) => {
     document.body.style.overflow = locked ? 'hidden' : '';
+    document.body.style.paddingRight = locked ? '10px' : '';
 };
 
 watch(isModalShow, (visible) => {
@@ -144,10 +145,10 @@ const confirmModal = () => {
 
 const setElPosition = () => {
     const dateEl = dateRefs.value[selectDate.value.format('YYYY-MM-DD')];
-    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
+    (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop! - document.documentElement.scrollTop + 'px';
     (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
 
-    if (document.documentElement.clientHeight * .9 < (dateEl?.offsetTop! + dateEl?.offsetHeight!)) (modalRef.value as any).rootEl.classList.add('position_top')
+    if (document.documentElement.clientHeight * .9 < (dateEl?.offsetTop! + dateEl?.offsetHeight! - document.documentElement.scrollTop)) (modalRef.value as any).rootEl.classList.add('position_top')
     else (modalRef.value as any).rootEl.classList.remove('position_top')
 }
 
