@@ -19,7 +19,7 @@
             >
                 <ElIcon><ArrowLeftBold /></ElIcon>
             </button>
-            <div class="flex-1 text-center">{{ selectDate.format('MMM YYYY') }}</div>
+            <div class="flex-1 text-center">{{ selectDate.format(translateStore.lang === 'en' ? 'MMM YYYY' : 'YYYY年 MM月') }}</div>
             <button 
                 @click="selectDate = selectDate.add(1, 'M')" 
                 class="
@@ -64,7 +64,7 @@
                 <template #modal>
                     <Modal
                         ref="modalRef"
-                        header-title="日程安排" 
+                        :header-title="translation.schedule" 
                         disable-btn
                         is-follow-ref
                         @click.stop
@@ -94,9 +94,13 @@ import Modal from '../Modal/index.vue'
 import { ArrowLeftBold, ArrowRightBold } from '@element-plus/icons-vue';
 import dayjs from 'dayjs';
 import { ElIcon } from 'element-plus';
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, inject, nextTick, onBeforeUnmount, ref, watch } from 'vue';
+import { useTranslateStore } from '../../stores/translate';
 
-const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+const translateStore = useTranslateStore();
+const translation: any = inject('app-translation');
+
+const days = translation.weekList;
 const now = ref(dayjs());
 const selectDate = ref(dayjs());
 const daysOfMonth = computed<string[]>(() => {
@@ -156,6 +160,7 @@ const handleCheckDate = async (date: string) => {
 watch(
     selectDate,
     () => {
+        if (!isModalShow.value) return;
         const dateEl = dateRefs.value[selectDate.value.format('YYYY-MM-DD')];
         (modalRef.value as any).rootEl.style.top = dateEl?.offsetTop + 'px';
         (modalRef.value as any).rootEl.style.left = dateEl?.offsetLeft + 'px';
