@@ -15,6 +15,9 @@ export const translateOptions = {
         // 日历组件
         schedule: '日程安排',
         weekList: ['日', '一', '二', '三', '四', '五', '六'],
+
+        // 日历弹窗组件
+        noValidDataObtained: '暂未获取到有效数据',
     },
     'en': {
         // Navigator
@@ -32,6 +35,9 @@ export const translateOptions = {
         // Calendar Component
         schedule: 'Schedule',
         weekList: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+
+        // Calendar Pop Card Component
+        noValidDataObtained: 'No valid data obtained',
     }
 }
 

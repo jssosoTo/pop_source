@@ -77,7 +77,7 @@
                             <ul v-if="false">
                                 <li></li>
                             </ul>
-                            <div v-else class="px-4">暂未获取到活动。¯\(°_o)/¯ssssss</div>
+                            <div v-else class="px-4">{{ translation.noValidDataObtained }}<br/>———— ¯\(°_o)/¯ ————</div>
                         </template>
                     </Modal>
                 </template>
