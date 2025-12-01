@@ -13,19 +13,19 @@ body {
 }
 
 /* 自定义滚动条样式 */
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 10px; /* 设置滚动条宽度 */
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: transparent; /* 滚动条轨道颜色 */
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #888; /* 滚动条颜色 */
 }
 
-body::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #555; /* 滚动条悬停颜色 */
 }
 
